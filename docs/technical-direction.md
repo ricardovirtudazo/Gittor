@@ -49,6 +49,7 @@ Domain-driven design with distinct boundaries:
     - Phase 2: Process commit content with streaming approach
 - Stream-based processing for all repository sizes
 - Buffered writing with periodic flushing
+- Content estimation to predict file size before processing
 
 ### Resource Limitations
 
@@ -75,24 +76,64 @@ Domain-driven design with distinct boundaries:
 
 - **Decision**: Use LibGit2Sharp
 - **Rationale**: Better performance, type safety, exception handling
+- **Implementation**: Repository wrapper with targeted queries
 
 ### Content Processing Strategy
 
 - **Decision**: Two-pass approach for content estimation and file splitting
 - **Rationale**: Prevents mid-commit splits while maintaining size limits
+- **Implementation**:
+    - Pass 1: Calculate content size estimates
+    - Pass 2: Generate actual content with pre-planned splits
 
 ### File Splitting Algorithm
 
 - **Decision**: Threshold-based predictive splitting
 - **Implementation**:
-    - Track running character count
-    - Handle large commits across multiple files with continuation headers
-    - Split at logical boundaries within large commits
+    - Track running character count before writing
+    - Pre-calculate content size before adding to file
+    - For large commits:
+        - Break only at logical boundaries (file sections)
+        - Add continuation markers between parts
+        - Start new files with clear commit continuation headers
+
+### Unicode Handling Approach
+
+- **Decision**: Simple UTF-8 with fallback markers
+- **Implementation**:
+    - Primary: UTF-8 encoding for all file operations
+    - Fallback: Replace unsupported characters with standard placeholder
+    - For encoding errors: Use appropriate truncation markers
+    - C#: `// Content contains unsupported characters...`
+    - VB: `' Content contains unsupported characters...`
+    - XAML: `<!-- Content contains unsupported characters -->`
+    - diff: `... Content contains unsupported characters ...`
 
 ### Error Handling Approach
 
-- **Decision**: Exception bubbling with minimal handling
+- **Decision**: Simple exception bubbling
 - **Implementation**:
     - Repository/path errors: Bubble up and exit
     - No author matches: Show 0 commits and exit
-    - Commit errors: Console reporting and continue
+    - Commit errors: Report to console and continue
+    - Report full exception message and stack trace
+    - No custom exception types
+
+### Processing Implementation
+
+- **Decision**: Simple streaming approach
+- **Implementation**:
+    - Process commits sequentially
+    - Write output as processing occurs
+    - Use basic buffering for output files
+    - Keep memory usage reasonable for large repositories
+
+### Console Output Strategy
+
+- **Decision**: Simple progress reporting
+- **Implementation**:
+    - Display total commit count
+    - Report generated file information
+    - Show summary statistics (files generated, commits processed)
+    - Report errors with exception details
+    - Match format from Feature Intent's Console Feedback section
