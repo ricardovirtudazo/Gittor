@@ -39,22 +39,9 @@
 
 ## Content Processing
 
-### Essential Files
-
-- Source: `.cs`, `.vb`, `.xaml`
-- Config: `.csproj`, `.vbproj`, `app.config`
-- Docs: `README.md`, `CHANGELOG.md`
-
-### Excluded Content
-
-- Binary/executables
-- Generated code
-- Build outputs
-- Source control metadata
-- Media assets
-- Documents, Excel or data files
-- Archives
-- Git files
+- Process and filter content from common .NET project types
+- Intelligently distinguish between essential development files and non-essential content
+- Support for different file formats with appropriate syntax handling
 
 ## Output Format
 
@@ -81,6 +68,19 @@
     - Old path (if renamed)
     - Content with appropriate syntax highlighting
 
+### Special Commits
+
+- Merge Commits:
+    - Skip diff content
+    - Show only commit message and affected files list
+
+### Content Truncation
+
+- File Snapshots (Added/Deleted):
+    - Language-specific truncation markers
+- Diffs (Modified/Renamed):
+    - Truncation marker: `... additional changes truncated ...`
+
 ### File Organization
 
 - Maximum file size: 700,000 characters
@@ -95,22 +95,6 @@
     - Header format: `## {commit_hash} ({date}) Continued...`
     - Sequence starts at 2 (e.g., part2, part3)
 - Only split at logical break points (between commits or file sections)
-
-### Content Truncation
-
-- File Snapshots (Added/Deleted):
-    - Language-specific truncation markers:
-        - C#: `// Content truncated...`
-        - VB: `' Content truncated...`
-        - XAML: `<!-- Content truncated -->`
-- Diffs (Modified/Renamed):
-    - Truncation marker: `... additional changes truncated ...`
-
-### Special Commits
-
-- Merge Commits:
-    - Skip diff content
-    - Show only commit message and affected files list
 
 ### Example Output
 
@@ -153,11 +137,6 @@ Done!
     - Behavior: Log error, continue processing remaining commits
     - Example: Skip corrupted commit while processing others
 
-## Project Type Support
-
-- Excel VSTO/PIA Add-ins (VB.NET, C#)
-- Windows Desktop Apps: WPF, WinUI 3, WinForms
-
 ## Success Definition
 
 ### Success Indicators
@@ -169,7 +148,7 @@ Done!
 
 ### Completion Criteria
 
-- CLI processes specified project types
+- CLI processes common .NET projects
 - Structured output with proper sections
 - Files within 700,000 character limit
 - Error handling: Exceptions bubble up with console reporting and exit (except for corrupt commits, which are reported to console and skipped)
