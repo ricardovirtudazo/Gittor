@@ -16,6 +16,12 @@
         - Organizes output with proper syntax highlighting
         - Respects AI token limits with file splitting
     - Example: Repository with mixed content → Markdown files with only relevant code changes
+    - CLI Usage: `gittor <repo-path> <output-dir> <author-pattern> [options]`
+        
+        ```
+        Options:-h, --help      Show help message
+        ```
+        
 2. As a job seeker, I want to create professional case studies from Git contributions.
     
     - Acceptance Criteria:
@@ -30,6 +36,107 @@
         - Intelligent file splitting at logical boundaries
         - Proper content truncation when necessary
     - Example: 3500+ commit repository → Multiple files under token limit
+
+## Content Processing
+
+### Essential Files
+
+- Source: `.cs`, `.vb`, `.xaml`
+- Config: `.csproj`, `.vbproj`, `app.config`
+- Docs: `README.md`, `CHANGELOG.md`
+
+### Excluded Content
+
+- Binary/executables
+- Generated code
+- Build outputs
+- Source control metadata
+- Media assets
+- Documents, Excel or data files
+- Archives
+- Git files
+
+## Output Format
+
+### Document Structure
+
+- **H1**: File Information
+    
+    - Title: Git History (Part {number})
+    - Period: {start_date} to {end_date}
+    - Commit count: Total commits in file
+- **H2**: Commit Details
+    
+    - Format: {hash} ({date})
+    - Message: Title + Description (if present)
+- **H3**: Change Category
+    
+    - Added
+    - Deleted
+    - Modified/Renamed
+    - Other Types
+- **H4**: File Details
+    
+    - Path (current)
+    - Old path (if renamed)
+    - Content with appropriate syntax highlighting
+
+### File Organization
+
+- Maximum file size: 700,000 characters
+- Content threshold: 90% (630,000 characters) reserved for content
+- Filename pattern: `git-history-{start_date}-to-{end_date}-part{sequence}.md`
+
+### File Splitting Rules
+
+- Start new file when next commit would exceed limit
+- Single large commits:
+    - Continue content in new file
+    - Header format: `## {commit_hash} ({date}) Continued...`
+    - Sequence starts at 2 (e.g., part2, part3)
+- Only split at logical break points (between commits or file sections)
+
+### Content Truncation
+
+- File Snapshots (Added/Deleted):
+    - Language-specific truncation markers:
+        - C#: `// Content truncated...`
+        - VB: `' Content truncated...`
+        - XAML: `<!-- Content truncated -->`
+- Diffs (Modified/Renamed):
+    - Truncation marker: `... additional changes truncated ...`
+
+### Special Commits
+
+- Merge Commits:
+    - Skip diff content
+    - Show only commit message and affected files list
+
+### Example Output
+
+See the separate file `sample-output.md` for a complete example of the expected markdown output format, including code blocks with proper syntax highlighting and diff formatting.
+
+## Console Feedback
+
+### Progress Indicators
+
+- Commit processing count
+- File generated status
+- Summary statistics:
+    - Total files generated
+    - Total commits processed
+    - Status
+
+### Example Console Output
+
+```
+Total commits: 3559
+Generated: 2017-04-21 to 2017-04-24 (5 commits)
+Summary:
+- Total files generated: 61
+- Total commits processed: 3559
+Done!
+```
 
 ## Edge Cases
 
