@@ -78,6 +78,35 @@ Domain-driven design with distinct boundaries:
 - **Rationale**: Better performance, type safety, exception handling
 - **Implementation**: Repository wrapper with targeted queries
 
+### File Filtering Implementation
+
+- **Decision**: Pattern-based matching for file extensions and paths
+- **Rationale**: Simple, flexible, and transparent approach to filtering
+- **Implementation**:
+    - Essential file patterns:
+        - Source: `.cs`, `.vb`, `.xaml`
+        - Config: `.csproj`, `.vbproj`, `app.config`
+        - Docs: `README.md`, `CHANGELOG.md`
+    - Global exclusions:
+        - Binaries/executables: `.exe`, `.dll`, `.obj`, etc.
+        - Generated code: auto-generated files
+        - Build outputs: `bin/`, `obj/`, etc.
+        - Source control metadata: `.git/`
+        - Media assets: `.jpg`, `.png`, etc.
+        - Office documents: `.docx`, `.xlsx`, etc.
+        - Archives: `.zip`, `.rar`, etc.
+    - Pattern matching using glob syntax for both inclusion and exclusion
+
+### Merge Commit Handling
+
+- **Decision**: Special processing for merge commits
+- **Rationale**: Merge commit diffs are often noisy and less meaningful
+- **Implementation**:
+    - Detect merge commits via LibGit2Sharp
+    - Skip diff content generation
+    - Include only commit message and affected files list
+    - Format as special section with merge information
+
 ### Content Processing Strategy
 
 - **Decision**: Two-pass approach for content estimation and file splitting
@@ -99,15 +128,16 @@ Domain-driven design with distinct boundaries:
 
 ### Unicode Handling Approach
 
-- **Decision**: Simple UTF-8 with fallback markers
+- **Decision**: Hybrid approach with multiple fallbacks
 - **Implementation**:
     - Primary: UTF-8 encoding for all file operations
-    - Fallback: Replace unsupported characters with standard placeholder
-    - For encoding errors: Use appropriate truncation markers
-    - C#: `// Content contains unsupported characters...`
-    - VB: `' Content contains unsupported characters...`
-    - XAML: `<!-- Content contains unsupported characters -->`
-    - diff: `... Content contains unsupported characters ...`
+    - Secondary: UTF-16 fallback for unsupported characters
+    - Last resort: Replace unsupported characters with standard placeholder
+    - Error handling:
+        - C#: `// Content contains unsupported characters...`
+        - VB: `' Content contains unsupported characters...`
+        - XAML: `<!-- Content contains unsupported characters -->`
+        - diff: `... Content contains unsupported characters ...`
 
 ### Error Handling Approach
 
