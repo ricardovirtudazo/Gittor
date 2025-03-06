@@ -1,0 +1,36 @@
+---
+description: Enforces SOLID principles and clean architecture patterns
+globs: ["**/*.cs"]
+alwaysApply: true
+---
+
+# Architecture Rule
+
+## SOLID Principles
+
+- **Single Responsibility**: Each class should focus on one concern
+    - Extract concerns into separate classes when multiple responsibilities identified
+- **Open/Closed**: Extend behavior without modifying existing code
+    - Use abstractions and interfaces for extension points
+    - Prefer composition over inheritance
+- **Liskov Substitution**: Subtypes must be substitutable for base types
+    - Derived classes should not change base class behavior
+    - Maintain contracts and invariants in overrides
+- **Interface Segregation**: Create focused interfaces based on client needs
+    - Split large interfaces into smaller, purpose-specific ones
+- **Dependency Inversion**: Depend on abstractions, not implementations
+    - Inject dependencies through constructors
+    - Use interface parameters over concrete implementations
+
+## Clean Architecture
+
+- **Layer Separation**: Maintain strict boundaries between layers
+    - Core domain should have no external dependencies
+    - Dependencies point inward toward domain
+    - Use interfaces to cross boundaries
+- **Use Cases**: Encapsulate business logic in use cases/services
+    - Keep controllers/handlers thin
+    - Service methods should represent single business operation
+- **Domain Models**: Make domain models rich and behavior-focused
+    - Encapsulate business rules within entities
+    - Use value objects for concept integrity
