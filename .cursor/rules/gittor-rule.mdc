@@ -1,0 +1,15 @@
+---
+description: Guidelines for working with the Gittor codebase
+globs: ["**/*.cs"]
+alwaysApply: true
+---
+
+# Gittor Development Guidelines
+
+## Project Structure
+
+- **Gittor**: Core library with all domain logic
+  - `Core`: Essential domain concepts and interfaces
+  - `Git`: Repository access and Git operations
+  - `Formatting`: Language-specific formatting
+  - `Output`: File generation and splitting logic
