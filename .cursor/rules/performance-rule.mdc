@@ -1,0 +1,40 @@
+---
+description: Ensures performant code with proper resource management
+globs: ["**/*.cs"]
+alwaysApply: true
+---
+
+# Performance Rule
+
+## Asynchronous Programming
+
+- **Task Management**: Use async/await patterns appropriately
+    - Implement cancellation tokens for long-running operations
+    - Avoid async void except for event handlers
+    - Use ConfigureAwait(false) in library code
+- **Parallelism**: Apply parallel processing thoughtfully
+    - Use Parallel.ForEach for CPU-bound operations
+    - Consider Task.WhenAll for concurrent I/O operations
+    - Be mindful of thread coordination costs
+
+## Resource Management
+
+- **Disposal**: Use proper disposal patterns
+    - Implement IDisposable for resource-holding classes
+    - Use using statements/declarations for disposable resources
+    - Dispose of resources in the reverse order of acquisition
+- **Memory Usage**: Be mindful of memory consumption
+    - Avoid holding references to large objects unnecessarily
+    - Consider object pooling for frequently created objects
+    - Watch for hidden allocations in hot code paths
+
+## Optimization Focus
+
+- **Data Structures**: Choose appropriate collections
+    - Use specialized collections for specific needs (HashSet for lookups, etc.)
+    - Consider collection capacity settings to avoid resizing
+    - Be aware of collection copying behaviors
+- **I/O Efficiency**: Optimize I/O operations
+    - Batch database operations where possible
+    - Use streams appropriately for large data
+    - Consider buffering strategies for network and file operations
