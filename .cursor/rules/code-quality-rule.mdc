@@ -1,0 +1,44 @@
+---
+description: Ensures code meets quality standards for readability and maintainability
+globs: ["**/*.cs"]
+alwaysApply: true
+---
+
+# Code Quality Rule
+
+## Minimalist Design
+
+- **YAGNI**: Don't implement features until needed
+    - Avoid speculative generalization
+    - Remove unused code and "future-proofing"
+- **DRY**: Avoid duplication without premature abstraction
+    - Consolidate duplicate logic but don't over-abstract
+    - Create shared utilities only after repeated patterns emerge
+- **Explicit Over Implicit**: Prefer readable code over clever code
+    - Avoid magic strings/numbers
+    - Write self-documenting code with descriptive names
+    - Use comments only for "why" not "what" (code should explain what it does)
+
+## Naming Conventions
+
+- Use clear, descriptive names that reveal intent
+    - PascalCase for classes, methods, properties
+    - camelCase for parameters and local variables
+    - Prefix interfaces with 'I'
+    - Suffix async methods with 'Async'
+    - Avoid abbreviations except for standard ones (ID, HTTP, etc.)
+    - Use positive phrasing (e.g., `isCorrect` instead of `isNotCorrect` or `isFalse`)
+
+## Organization
+
+- Organize code by feature, not technical concerns
+- Namespace should match folder structure
+- Keep implementation details hidden from API boundaries
+- Maintain consistency in file structure across similar components
+
+## Complexity Control
+
+- Keep code straightforward with manageable complexity
+    - Avoid deeply nested conditionals
+    - Extract complex conditions to well-named methods
+    - Favor early returns over nested conditions
