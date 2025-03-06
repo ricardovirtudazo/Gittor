@@ -18,6 +18,24 @@ alwaysApply: true
     - Avoid magic strings/numbers
     - Write self-documenting code with descriptive names
     - Use comments only for "why" not "what" (code should explain what it does)
+    - Avoid XML comments when descriptive naming is sufficient
+
+## Modern C# Features
+
+- **Type Systems**
+    - Favor `record` types with `init` properties for DTOs and immutable data
+    - Use primary constructors where they reduce boilerplate and improve readability
+    - Enable nullable reference types to catch null reference exceptions at compile time
+    - Use the `required` modifier to enforce initialization of critical properties
+- **Syntax Improvements**
+    - Use file-scoped namespaces to reduce indentation
+    - Prefer expression-bodied members for concise implementations
+    - Utilize string interpolation over string.Format for readability
+    - Apply target-typed new expressions when type is clear from context
+- **Advanced Patterns**
+    - Use pattern matching for more expressive conditional logic
+    - Favor immutable objects and collections where appropriate
+    - Apply LINQ and functional patterns for declarative data transformations
 
 ## Naming Conventions
 
@@ -28,6 +46,7 @@ alwaysApply: true
     - Suffix async methods with 'Async'
     - Avoid abbreviations except for standard ones (ID, HTTP, etc.)
     - Use positive phrasing (e.g., `isCorrect` instead of `isNotCorrect` or `isFalse`)
+    - Use descriptive property names instead of explanatory comments (e.g., `MessageTitle` instead of `Message` with a comment)
 
 ## Organization
 
