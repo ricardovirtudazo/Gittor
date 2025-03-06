@@ -27,11 +27,20 @@
 
 ### Code Organization
 
-Domain-driven design with distinct boundaries:
-- `Gittor.Core`: Domain models and core logic
-- `Gittor.Git`: Repository access
-- `Gittor.Formatting`: Language-specific formatting
-- `Gittor.Output`: File generation and splitting
+Simple structure with namespace separation:
+	- `Gittor`: Main library with all domain logic
+	    - `Gittor.Core`: Essential domain concepts and interfaces
+	    - `Gittor.Git`: Repository access and Git operations
+	    - `Gittor.Formatting`: Language-specific formatting
+	    - `Gittor.Output`: File generation and splitting logic
+	- `Gittor.CLI`: Console application for user interaction
+
+Benefits of this approach:
+	- Reduced solution complexity
+	- Simplified dependency management
+	- Faster build times
+	- Clear logical separation while maintaining cohesion
+
 
 ### Design Patterns
 
