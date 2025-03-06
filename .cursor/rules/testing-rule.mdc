@@ -1,0 +1,36 @@
+---
+description: Enforces testing best practices for reliable test suites
+globs: ["**/*.Tests.cs", "**/*Tests.cs", "**/*Test.cs"]
+alwaysApply: true
+---
+
+# Testing Rule
+
+## Test Structure
+
+- **Arrange-Act-Assert**: Structure tests with clear separation
+    - Arrange: Set up test prerequisites and inputs
+    - Act: Execute the operation being tested
+    - Assert: Verify expected outcomes
+- **Naming**: Use descriptive test names that explain intent
+    - Format: `[Method]_[Scenario]_[ExpectedResult]`
+    - Examples: `CalculateTotal_WithDiscounts_AppliesDiscountsCorrectly`
+
+## Test Quality
+
+- **Test Isolation**: Keep tests independent and repeatable
+    - Reset state between tests
+    - Avoid test interdependencies
+    - Mock external systems and file operations
+- **Edge Cases**: Cover boundary conditions and failure modes
+    - Test invalid inputs and error handling
+    - Include edge cases specific to the domain
+    - Test empty collections, null values, etc.
+
+## Coverage Focus
+
+- **Priority Testing**: Focus testing effort where it matters most
+    - Core domain logic and business rules
+    - Complex algorithms and calculations
+    - Error handling and edge cases
+    - Integration points between components
