@@ -19,6 +19,8 @@ alwaysApply: true
     - Write self-documenting code with descriptive names
     - Use comments only for "why" not "what" (code should explain what it does)
     - Avoid XML comments when descriptive naming is sufficient
+    - Do not create XML documentation comments that merely restate the class or property name (e.g., no "Gets the hash" for a property named "Hash")
+    - XML comments should only be used for complex logic or non-obvious behavior that cannot be conveyed by naming
 
 ## Modern C# Features
 
@@ -47,6 +49,7 @@ alwaysApply: true
     - Avoid abbreviations except for standard ones (ID, HTTP, etc.)
     - Use positive phrasing (e.g., `isCorrect` instead of `isNotCorrect` or `isFalse`)
     - Use descriptive property names instead of explanatory comments (e.g., `MessageTitle` instead of `Message` with a comment)
+    - Avoid unnecessary suffixes like "Model" unless they provide meaningful context (prefer `Commit` over `CommitModel` when the purpose is clear)
 
 ## Organization
 
