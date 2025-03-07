@@ -8,8 +8,8 @@
       "preLaunchTask": "build",
       "program": "${workspaceFolder}/Gittor.CLI/bin/Debug/net9.0/Gittor.CLI.dll",
       "args": [
-        "/repo/",
-        "/output-root/output/",
+        "/repo",
+        "/output-root/debug-output",
         "*"
       ],
       "cwd": "${workspaceFolder}",

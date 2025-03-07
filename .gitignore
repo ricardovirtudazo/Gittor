@@ -58,3 +58,8 @@ bld/
 
 # macOS specific
 .DS_Store
+
+# Dev Container specific files
+.devcontainer/devcontainer.json
+# Don't ignore the template
+!.devcontainer/devcontainer.template.json

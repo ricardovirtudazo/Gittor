@@ -5,6 +5,10 @@
     "ghcr.io/devcontainers/features/git:1": {}
   },
   "forwardPorts": [],
+  "mounts": [
+    "source=/path/to/your/repository,target=/repo,type=bind,consistency=cached",
+    "source=/path/to/your/output,target=/output-root,type=bind,consistency=cached"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
