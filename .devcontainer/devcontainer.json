@@ -1,0 +1,27 @@
+{
+  "name": "Gittor Development",
+  "image": "mcr.microsoft.com/dotnet/sdk:9.0-preview",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "forwardPorts": [],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.csdevkit",
+        "csharpier.csharpier-vscode",
+        "github.copilot",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "omnisharp.enableRoslynAnalyzers": true,
+        "omnisharp.enableImportCompletion": true,
+        "omnisharp.enableMsBuildLoadProjectsOnDemand": true
+      }
+    }
+  },
+  "postCreateCommand": "dotnet restore",
+  "remoteUser": "root"
+} 
